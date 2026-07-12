@@ -2,37 +2,36 @@
 
 ## Project Status
 
-### ✅ Completed Sections
+### 🚀 Development Milestones
 
-* Navigation
-* Hero
-* About
-* Signature Dishes
-* Interactive Menu
-* Gallery
-* Executive Chef
-* Reservation
-
----
-
-## 🚧 Current Task
-
-**Testimonials**
-
-Design and implement a premium testimonials section that reinforces trust and the restaurant's luxury brand while integrating seamlessly with the existing design system, animation philosophy, and architecture.
+* **v0.1** — Navigation ✅
+* **v0.2** — Hero ✅
+* **v0.3** — About ✅
+* **v0.4** — Signature Dishes ✅
+* **v0.5** — Interactive Menu ✅
+* **v0.6** — Gallery ✅
+* **v0.7** — Executive Chef ✅
+* **v0.8** — Reservation ✅
 
 ---
 
-## 📋 Remaining Sections
+## 🚧 Current Milestone
 
-1. Testimonials
-2. Location
-3. Footer
-4. Final Polish
-5. Performance Optimization
-6. SEO
-7. Accessibility Audit
-8. Final QA & Production Review
+**v0.9 — Testimonials**
+
+Design and implement a premium testimonials section that reinforces trust, authenticity, and the restaurant's luxury brand while integrating seamlessly with the existing design system, animation philosophy, and architecture.
+
+---
+
+## 📅 Upcoming Milestones
+
+* **v1.0** — Location
+* **v1.1** — Footer
+* **v1.2** — Final Polish
+* **v1.3** — Performance Optimization
+* **v1.4** — SEO
+* **v1.5** — Accessibility Audit
+* **v1.6** — Final QA & Production Review
 
 ---
 
@@ -99,6 +98,6 @@ Do not introduce new design patterns unless they clearly improve the overall use
 
 ## Current Goal
 
-Build a premium Testimonials section that showcases authentic guest experiences, strengthens credibility, and maintains the same handcrafted, elegant, and luxurious experience established throughout the website.
+Build a premium Testimonials section that showcases authentic guest experiences, strengthens credibility, and maintains the handcrafted, elegant, and luxurious experience established throughout the website.
 
 The implementation should be visually refined, responsive, accessible, performant, and fully consistent with all attached project documents.
