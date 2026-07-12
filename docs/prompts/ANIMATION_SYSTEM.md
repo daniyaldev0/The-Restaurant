@@ -1,0 +1,7 @@
+[ANIMATION_SYSTEM.md](https://github.com/user-attachments/files/29939233/ANIMATION_SYSTEM.md)
+[PROJECT_RULES.md](https://github.com/user-attachments/files/29939236/PROJECT_RULES.md)
+[CODE_STANDARDS.md](https://github.com/user-attachments/files/29939235/CODE_STANDARDS.md)
+[Project-progress.md](https://github.com/user-attachments/files/29939237/Project-progress.md)
+[FINAL_QA_CHECKLIST.md](https://github.com/user-attachments/files/29939240/FINAL_QA_CHECKLIST.md)
+[DESIGN_SYSTEM.md](https://github.com/user-attachments/files/29939239/DESIGN_SYSTEM.md)
+[UI-UX-design-principles.md](https://github.com/user-attachments/files/29939238/UI-UX-design-principles.md)
