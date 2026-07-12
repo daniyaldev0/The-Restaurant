@@ -636,4 +636,21 @@
     lightboxNext.addEventListener("click", next);
     lightboxPrev.addEventListener("click", prev);
   }
+
+  /* ----------------------------------------------------------
+     14. Location -- scroll-triggered reveal
+     Same createScrollReveal helper as every previous section:
+     the header reveals as one unit, the information column
+     reveals with its own internal stagger (address, hours,
+     contact, parking, note, CTA), and the map slides in from
+     the opposite side -- the same split-layout reveal language
+     used by the Chef and Experience sections.
+  ---------------------------------------------------------- */
+  const locationHeader = document.getElementById("locationHeader");
+  const locationInfo = document.getElementById("locationInfo");
+  const locationMap = document.getElementById("locationMap");
+
+  createScrollReveal([locationHeader]);
+  createScrollReveal([locationInfo]);
+  createScrollReveal([locationMap]);
 })();
