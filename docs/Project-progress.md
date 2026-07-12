@@ -26,10 +26,11 @@ Design and implement a premium testimonials section that reinforces trust, authe
 ## 📅 Upcoming Milestones
 
 * **v1.0** — Experience
-* **v1.1** — Journal
-* **v1.2** — Location
+* **v1.1** — Location
+* **v1.2** — Journal
 * **v1.3** — Footer
 * **v1.4** — Final Polish
+* **v1.45** — Motion Polish
 * **v1.5** — Performance Optimization
 * **v1.6** — SEO
 * **v1.7** — Accessibility Audit

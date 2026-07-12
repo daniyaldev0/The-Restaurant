@@ -2522,7 +2522,13 @@ button {
 .testimonial-card:nth-child(4) { grid-area: d; }
 .testimonial-card:nth-child(5) { grid-area: e; }
 
-/* --- Individual testimonial card --- */
+/* --- Individual testimonial card ---
+   Reveal (opacity/transform) runs once at 0.8s when the card
+   enters view; once .is-inview lands, transform switches to a
+   fast dur-fast transition so the hover lift below feels like a
+   quick microinteraction rather than inheriting the slow
+   entrance timing. box-shadow stays on dur-med throughout,
+   matching the gallery item hover pattern. */
 .testimonial-card {
   position: relative;
   display: flex;
@@ -2533,21 +2539,20 @@ button {
   border: 1px solid var(--hairline);
   border-radius: 20px;
   box-shadow: 0 24px 56px -26px rgba(17, 17, 17, 0.2);
-  transition: transform var(--dur-med) var(--ease-premium),
-    box-shadow var(--dur-med) var(--ease-premium);
-
-  /* Staggered scroll-reveal, same transition language as gallery cells */
   opacity: 0;
   transform: translateY(28px);
-  transition-property: opacity, transform, box-shadow;
-  transition-duration: 0.8s, 0.8s, var(--dur-med);
-  transition-timing-function: var(--ease-premium);
+  transition: opacity 0.8s var(--ease-premium),
+    transform 0.8s var(--ease-premium),
+    box-shadow var(--dur-med) var(--ease-premium);
   will-change: transform, opacity;
 }
 
 .testimonial-card.is-inview {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.8s var(--ease-premium),
+    transform var(--dur-fast) var(--ease-premium),
+    box-shadow var(--dur-med) var(--ease-premium);
 }
 
 /* Gentle stagger by DOM order — mirrors the gallery cell delay pattern */
@@ -2557,14 +2562,13 @@ button {
 .testimonial-card:nth-child(4) { transition-delay: 0.26s; }
 .testimonial-card:nth-child(5) { transition-delay: 0.33s; }
 
-/* Gentle hover lift, consistent with card hover behaviour elsewhere */
+/* Gentle hover lift, consistent with card hover behaviour elsewhere.
+   Only reads as fast once .is-inview supplies the dur-fast
+   transform transition above, so entrance and hover never share
+   the same timing. */
 .testimonial-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 32px 68px -26px rgba(17, 17, 17, 0.28);
-}
-
-.testimonial-card.is-inview:hover {
-  transform: translateY(-4px);
 }
 
 .testimonial-card--featured {
@@ -2575,7 +2579,7 @@ button {
 /* --- Occasion badge: small, rounded, accent color only --- */
 .testimonial-card__occasion {
   display: inline-block;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2590,7 +2594,7 @@ button {
   display: block;
   width: 32px;
   height: 1px;
-  margin: 20px 0;
+  margin: 24px 0;
   background: var(--gold);
 }
 
@@ -2616,8 +2620,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: 32px;
+  padding-top: 24px;
   border-top: 1px solid var(--hairline);
   width: 100%;
 }
@@ -2631,10 +2635,10 @@ button {
 
 .testimonial-card__location {
   font-size: 12px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-soft);
-  font-weight: 400;
+  color: var(--olive);
+  font-weight: 500;
 }
 
 /* --- Trust reinforcement strip, reuses the info-item pattern
