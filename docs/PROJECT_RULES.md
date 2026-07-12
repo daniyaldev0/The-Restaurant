@@ -5,6 +5,37 @@ Version: 1.0
 
 ---
 
+# Engineering Philosophy
+
+Before writing any code, follow this decision ladder:
+
+1. Does this already exist in the project?
+   Reuse existing HTML structures, CSS variables, utility classes, animations, helper functions, and components.
+
+2. Can the browser solve this natively?
+   Prefer semantic HTML, CSS, and modern browser APIs over custom JavaScript.
+
+3. Can the existing JavaScript architecture handle it?
+   Extend existing helper functions instead of creating duplicates.
+
+4. Can this be implemented with fewer lines while preserving readability?
+
+5. Only then write new code.
+
+Prefer extending over replacing.
+
+Prefer modification over duplication.
+
+Prefer deletion over addition.
+
+Generate the smallest production-ready change that satisfies the requirements.
+
+Avoid unnecessary abstractions.
+
+Avoid creating new files unless explicitly requested.
+
+
+
 # Objective
 
 Build a production-ready, premium restaurant website that feels handcrafted, elegant, and timeless.
@@ -528,6 +559,31 @@ Keep markup readable.
 Use meaningful class names.
 
 ---
+
+# Existing Code First
+
+Before implementing any feature:
+
+- Read the existing HTML.
+- Read the related CSS.
+- Read the related JavaScript.
+- Understand how the section is currently built.
+- Follow existing naming conventions.
+- Reuse existing architecture whenever possible.
+
+Never regenerate completed sections.
+
+Never rewrite working code simply because another solution exists.
+
+# Code Generation Rules
+
+Generate only the code required for the current task.
+
+Do not regenerate unrelated code.
+
+Do not reformat existing code unless necessary.
+
+Return only the HTML, CSS, and JavaScript changes required for implementation.
 
 # Section Order
 

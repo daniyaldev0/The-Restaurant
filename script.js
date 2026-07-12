@@ -267,6 +267,26 @@
   createScrollReveal(galleryCells, { threshold: 0.15 });
 
   /* ----------------------------------------------------------
+     Experience — scroll-triggered reveal
+     Header reveals as one unit; the editorial story column and
+     the image column reveal together (image slides in from the
+     right, mirroring the Chef section's opposite direction);
+     the highlight list staggers in via CSS nth-child delays;
+     the closing CTA reveals last — reusing the same
+     createScrollReveal helper as every previous section.
+  ---------------------------------------------------------- */
+  const experienceHeader = document.getElementById("experienceHeader");
+  const experienceContent = document.getElementById("experienceContent");
+  const experienceVisual = document.getElementById("experienceVisual");
+  const experienceHighlights = document.getElementById("experienceHighlights");
+  const experienceCta = document.getElementById("experienceCta");
+
+  createScrollReveal([experienceHeader]);
+  createScrollReveal([experienceContent, experienceVisual]);
+  createScrollReveal([experienceHighlights], { threshold: 0.15 });
+  createScrollReveal([experienceCta]);
+
+  /* ----------------------------------------------------------
      11. Executive Chef — scroll-triggered reveal
      Header (label + heading + intro) reveals as one unit;
      portrait and story content reveal independently — the
