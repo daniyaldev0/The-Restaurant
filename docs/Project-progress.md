@@ -19,19 +19,22 @@
 
 **v0.9 — Testimonials**
 
-Design and implement a premium testimonials section that reinforces trust, authenticity, and the restaurant's luxury brand while integrating seamlessly with the existing design system, animation philosophy, and architecture.
+Design and implement a premium testimonials section that reinforces trust, authenticity, and the restaurant's luxury brand while integrating seamlessly with the existing design system and architecture.
 
 ---
 
 ## 📅 Upcoming Milestones
 
-* **v1.0** — Location
-* **v1.1** — Footer
-* **v1.2** — Final Polish
-* **v1.3** — Performance Optimization
-* **v1.4** — SEO
-* **v1.5** — Accessibility Audit
-* **v1.6** — Final QA & Production Review
+* **v1.0** — Experience
+* **v1.1** — Journal
+* **v1.2** — Location
+* **v1.3** — Footer
+* **v1.4** — Final Polish
+* **v1.5** — Performance Optimization
+* **v1.6** — SEO
+* **v1.7** — Accessibility Audit
+* **v1.8** — Final QA & Production Review
+* **v2.0** — Production Release
 
 ---
 
@@ -46,19 +49,19 @@ Design and implement a premium testimonials section that reinforces trust, authe
 
 ### CSS
 
-* Global design system using CSS variables
-* Shared utility classes
-* Responsive layout
-* Reusable button, card, and form styles
-* Existing animation classes and utilities
+* Global design system using CSS variables.
+* Shared utility classes.
+* Responsive layout.
+* Reusable button, card, and form styles.
+* Existing animation classes and utilities.
 
 ### JavaScript
 
-* Vanilla JavaScript (ES6+)
-* Modular architecture
-* Shared helper functions
-* Existing `IntersectionObserver` reveal system
-* Performance-focused implementation
+* Vanilla JavaScript (ES6+).
+* Modular architecture.
+* Shared helper functions.
+* Existing `IntersectionObserver` reveal system.
+* Performance-focused implementation.
 
 ---
 
