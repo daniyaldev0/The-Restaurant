@@ -251,4 +251,351 @@
       });
     });
   });
+
+  /* ----------------------------------------------------------
+     9. Gallery — scroll-triggered reveal
+     Header (label + heading + intro) reveals as one unit;
+     each masonry cell reveals independently with a CSS-driven
+     stagger (nth-child transition-delay), reusing the same
+     createScrollReveal helper as About / Signature Dishes so
+     entrances replay naturally on re-scroll.
+  ---------------------------------------------------------- */
+  const galleryHeader = document.getElementById("galleryHeader");
+  const galleryCells = Array.from(document.querySelectorAll(".gallery__cell"));
+
+  createScrollReveal([galleryHeader]);
+  createScrollReveal(galleryCells, { threshold: 0.15 });
+
+  /* ----------------------------------------------------------
+     11. Executive Chef — scroll-triggered reveal
+     Header (label + heading + intro) reveals as one unit;
+     portrait and story content reveal independently — the
+     portrait slides in from the left while the bio, staggered
+     achievements, quote, and CTA fade up in sequence within
+     the content column (handled via CSS transition-delay).
+  ---------------------------------------------------------- */
+  const chefHeader = document.getElementById("chefHeader");
+  const chefVisual = document.getElementById("chefVisual");
+  const chefContent = document.getElementById("chefContent");
+
+  createScrollReveal([chefHeader]);
+  createScrollReveal([chefVisual, chefContent]);
+
+  /* ----------------------------------------------------------
+     12. Reservation — scroll-triggered reveal, validation,
+     and submission
+     Header reveals as one unit; the reservation card and the
+     supplementary info strip reveal together as the next beat
+     (card fades/slides up immediately, info items stagger in
+     via CSS nth-child delays), reusing the same
+     createScrollReveal helper as every previous section.
+  ---------------------------------------------------------- */
+  const reservationHeader = document.getElementById("reservationHeader");
+  const reservationCard = document.getElementById("reservationCard");
+  const reservationInfo = document.getElementById("reservationInfo");
+
+  createScrollReveal([reservationHeader]);
+  createScrollReveal([reservationCard, reservationInfo]);
+
+  const reservationForm = document.getElementById("reservationForm");
+
+  if (reservationForm) {
+    const reservationSubmit = document.getElementById("reservationSubmit");
+    const reservationSuccess = document.getElementById("reservationSuccess");
+    const reservationSuccessHeading = document.getElementById(
+      "reservationSuccessHeading"
+    );
+    const reservationReset = document.getElementById("reservationReset");
+    const dateInput = document.getElementById("resDate");
+
+    // Prevent selecting a date in the past — browser-native date
+    // picker, no custom calendar widget required.
+    const today = new Date();
+    const isoToday = `${today.getFullYear()}-${String(
+      today.getMonth() + 1
+    ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+    dateInput.min = isoToday;
+
+    // Field -> validator map. Each validator returns an error
+    // message string, or an empty string when the value is valid.
+    const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const PHONE_PATTERN = /^[+()\d\s-]{7,20}$/;
+
+    const validators = {
+      name(value) {
+        if (!value.trim()) return "Please enter your full name.";
+        return "";
+      },
+      email(value) {
+        if (!value.trim()) return "Please enter your email address.";
+        if (!EMAIL_PATTERN.test(value.trim())) {
+          return "Please enter a valid email address.";
+        }
+        return "";
+      },
+      phone(value) {
+        if (!value.trim()) return "Please enter a phone number.";
+        if (!PHONE_PATTERN.test(value.trim())) {
+          return "Please enter a valid phone number.";
+        }
+        return "";
+      },
+      guests(value) {
+        if (!value) return "Please select the number of guests.";
+        return "";
+      },
+      date(value) {
+        if (!value) return "Please choose a preferred date.";
+        if (value < isoToday) return "Please choose a date from today onward.";
+        return "";
+      },
+      time(value) {
+        if (!value) return "Please choose a preferred time.";
+        return "";
+      },
+    };
+
+    // Cache each field's input + error span together so validation
+    // and error rendering share a single lookup.
+    const fields = Array.from(
+      reservationForm.querySelectorAll("[name]")
+    ).reduce((map, input) => {
+      if (!validators[input.name]) return map; // e.g. optional "requests"
+      map[input.name] = {
+        input,
+        errorEl: document.getElementById(`${input.id}Error`),
+      };
+      return map;
+    }, {});
+
+    function validateField(name) {
+      const field = fields[name];
+      if (!field) return true;
+      const message = validators[name](field.input.value);
+      field.errorEl.textContent = message;
+      field.input.setAttribute("aria-invalid", message ? "true" : "false");
+      return !message;
+    }
+
+    function validateAll() {
+      let firstInvalidInput = null;
+
+      Object.keys(fields).forEach((name) => {
+        const fieldIsValid = validateField(name);
+        if (!fieldIsValid && !firstInvalidInput) {
+          firstInvalidInput = fields[name].input;
+        }
+      });
+
+      return { isValid: !firstInvalidInput, firstInvalidInput };
+    }
+
+    // Validate on blur so feedback appears once a person has
+    // actually finished with a field, not on every keystroke.
+    Object.values(fields).forEach(({ input }) => {
+      input.addEventListener("blur", () => validateField(input.name));
+    });
+
+    function setLoading(isLoading) {
+      reservationSubmit.classList.toggle("is-loading", isLoading);
+      reservationSubmit.disabled = isLoading;
+    }
+
+    function showSuccess() {
+      reservationForm.hidden = true;
+      reservationSuccess.hidden = false;
+
+      // Force layout before adding the visible class so the
+      // fade/scale/checkmark-draw transitions actually run.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          reservationSuccess.classList.add("is-visible");
+        });
+      });
+
+      reservationSuccessHeading.focus();
+      reservationForm.reset();
+      setLoading(false);
+    }
+
+    function resetToForm() {
+      reservationSuccess.classList.remove("is-visible");
+      reservationSuccess.hidden = true;
+      reservationForm.hidden = false;
+      Object.values(fields).forEach(({ input, errorEl }) => {
+        input.setAttribute("aria-invalid", "false");
+        errorEl.textContent = "";
+      });
+      fields.name?.input.focus();
+    }
+
+    reservationForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const { isValid, firstInvalidInput } = validateAll();
+      if (!isValid) {
+        firstInvalidInput?.focus();
+        return;
+      }
+
+      setLoading(true);
+
+      // No booking API is wired up yet — this simulates the round
+      // trip a real `fetch()` call to a reservations endpoint would
+      // make, so the loading/success states can be built and tested
+      // now and swapped for a real request later without touching
+      // the surrounding UI logic.
+      window.setTimeout(showSuccess, 900);
+    });
+
+    reservationReset?.addEventListener("click", resetToForm);
+  }
+
+  /* ----------------------------------------------------------
+     10. Gallery — premium fullscreen lightbox
+     Fade + scale entrance, prev/next navigation, ESC + outside
+     click to close, full keyboard support, and lazy-loaded
+     larger images (the full-res src is only ever assigned to
+     the lightbox <img> at the moment a slide is opened/shown).
+  ---------------------------------------------------------- */
+  const galleryItems = Array.from(document.querySelectorAll(".gallery__item"));
+
+  if (galleryItems.length) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxBackdrop = document.getElementById("lightboxBackdrop");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxCounter = document.getElementById("lightboxCounter");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+
+    // Build the slide list from the DOM — single source of truth,
+    // no duplicated data between HTML and JS.
+    const slides = galleryItems.map((btn) => ({
+      full: btn.getAttribute("data-full"),
+      alt: btn.querySelector("img")?.getAttribute("alt") ?? "",
+      caption: btn.querySelector(".gallery__item-title")?.textContent ?? "",
+    }));
+
+    const focusableSelector = ".lightbox__close, .lightbox__nav";
+    let currentIndex = 0;
+    let triggerEl = null;
+    let isOpen = false;
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function renderSlide(index) {
+      const slide = slides[index];
+      if (!slide) return;
+      // Larger image is only requested here — at the moment the
+      // slide is actually displayed — never preloaded up front.
+      lightboxImage.src = slide.full;
+      lightboxImage.alt = slide.alt;
+      lightboxCaption.textContent = slide.caption;
+      lightboxCounter.textContent = `${pad(index + 1)} / ${pad(slides.length)}`;
+    }
+
+    function showSlide(index) {
+      currentIndex = (index + slides.length) % slides.length;
+      renderSlide(currentIndex);
+    }
+
+    function openLightbox(index, sourceEl) {
+      triggerEl = sourceEl ?? null;
+      isOpen = true;
+      showSlide(index);
+
+      lightbox.hidden = false;
+      document.body.classList.add("lightbox-open");
+
+      // Force layout before adding the class so the fade/scale
+      // transition actually runs (matches the reduced-motion-safe
+      // pattern used by the hero entrance above).
+      if (prefersReducedMotion) {
+        lightbox.classList.add("is-open");
+      } else {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => lightbox.classList.add("is-open"));
+        });
+      }
+
+      lightboxClose.focus();
+      document.addEventListener("keydown", handleKeydown);
+    }
+
+    function closeLightbox() {
+      if (!isOpen) return;
+      isOpen = false;
+      lightbox.classList.remove("is-open");
+      document.body.classList.remove("lightbox-open");
+      document.removeEventListener("keydown", handleKeydown);
+
+      const finish = () => {
+        lightbox.hidden = true;
+        lightboxImage.src = "";
+        triggerEl?.focus();
+      };
+
+      if (prefersReducedMotion) {
+        finish();
+      } else {
+        lightboxBackdrop.addEventListener("transitionend", finish, { once: true });
+        // Safety net in case transitionend doesn't fire
+        setTimeout(finish, 700);
+      }
+    }
+
+    function next() {
+      showSlide(currentIndex + 1);
+    }
+
+    function prev() {
+      showSlide(currentIndex - 1);
+    }
+
+    function trapFocus(e) {
+      const focusables = Array.from(
+        lightbox.querySelectorAll(focusableSelector)
+      );
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    }
+
+    function handleKeydown(e) {
+      switch (e.key) {
+        case "Escape":
+          closeLightbox();
+          break;
+        case "ArrowRight":
+          next();
+          break;
+        case "ArrowLeft":
+          prev();
+          break;
+        case "Tab":
+          trapFocus(e);
+          break;
+      }
+    }
+
+    galleryItems.forEach((btn, index) => {
+      btn.addEventListener("click", () => openLightbox(index, btn));
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxBackdrop.addEventListener("click", closeLightbox);
+    lightboxNext.addEventListener("click", next);
+    lightboxPrev.addEventListener("click", prev);
+  }
 })();
