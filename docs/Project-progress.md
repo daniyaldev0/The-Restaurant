@@ -11,11 +11,11 @@ v0.4 — Signature Dishes ✓
 v0.5 — Interactive Menu ✓
 v0.6 — Gallery ✓
 v0.7 — Executive Chef ✓
+v0.8 — Reservation ✓
 
-Current: v0.8 — Reservation
+Current: v0.9 — Testimonials
 
 Next:
-v0.9 — Testimonials
 v1.0 — Location
 v1.1 — Footer
 v1.2 — Final Polish
