@@ -451,6 +451,24 @@
     reservationReset?.addEventListener("click", resetToForm);
   }
 
+
+  /* ----------------------------------------------------------
+     13. Testimonials — scroll-triggered reveal
+     Header reveals as one unit; each editorial testimonial
+     card reveals independently with a gentle DOM-order stagger
+     (CSS nth-child transition-delay), and the trust strip below
+     reveals as a group with its own internal stagger — the same
+     createScrollReveal helper used by every previous section,
+     so entrances replay naturally on re-scroll.
+  ---------------------------------------------------------- */
+  const testimonialsHeader = document.getElementById("testimonialsHeader");
+  const testimonialCards = Array.from(document.querySelectorAll(".testimonial-card"));
+  const testimonialsTrust = document.getElementById("testimonialsTrust");
+
+  createScrollReveal([testimonialsHeader]);
+  createScrollReveal(testimonialCards, { threshold: 0.15 });
+  createScrollReveal([testimonialsTrust]);
+
   /* ----------------------------------------------------------
      10. Gallery — premium fullscreen lightbox
      Fade + scale entrance, prev/next navigation, ESC + outside
