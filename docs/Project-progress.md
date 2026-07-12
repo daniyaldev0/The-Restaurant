@@ -12,22 +12,21 @@
 * **v0.6** — Gallery ✅
 * **v0.7** — Executive Chef ✅
 * **v0.8** — Reservation ✅
-**v0.9 — Testimonials** ✅*
-
+**v0.9 — Testimonials** ✅
+**### v1.0 — Experience**✅v
 ---
 
 ## 🚧 Current Milestone
 
-### v1.0 — Experience
+ **v1.1** — Location
 
-Design and implement a premium Experience section that showcases the restaurant's atmosphere, hospitality, and craftsmanship while integrating seamlessly with the existing design system, animation philosophy, and architecture.
-
+Build a premium Location section that makes finding and visiting the restaurant effortless while maintaining the website's luxury aesthetic and integrating seamlessly with the existing design system, animations, and architecture.
 
 ---
 
 ## 📅 Upcoming Milestones
 
-* **v1.1** — Location
+
 * **v1.2** — Journal
 * **v1.3** — Footer
 * **v1.4** — Final Polish
@@ -40,18 +39,11 @@ Design and implement a premium Experience section that showcases the restaurant'
 
 ---
 
-Description for Each Version
+**Description for Each Version**
 
 
-### v1.1 — Journal
-
+### v1.2 — Journal
 Design and implement an elegant Journal section that strengthens the restaurant's storytelling, editorial identity, and brand presence while integrating seamlessly with the existing design system, animation philosophy, and architecture.
-
----
-
-### v1.2 — Location
-
-Design and implement a premium Location section that makes finding and visiting the restaurant effortless while maintaining the website's luxury aesthetic and integrating seamlessly with the existing design system and architecture.
 
 ---
 
