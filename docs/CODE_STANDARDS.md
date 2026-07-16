@@ -1,19 +1,74 @@
 # CODE_STANDARDS.md
 
-## Purpose
+# AL MADINA TRADERS — Code Standards
 
-This document defines the coding standards for the project. Every contribution should follow these rules to ensure consistency, maintainability, scalability, and production readiness.
+Version: 3.0
 
 ---
 
-# General Principles
+# Purpose
 
-* Write clean, readable, production-quality code.
-* Prioritize maintainability over clever solutions.
-* Extend the existing architecture instead of replacing it.
-* Avoid duplicate code.
-* Keep files organized and predictable.
-* Prefer simplicity whenever multiple solutions exist.
+This document defines the engineering and coding standards for the **AL MADINA TRADERS** website.
+
+Every implementation must follow these standards to ensure the website remains consistent, maintainable, accessible, scalable, secure, and production-ready.
+
+These rules apply to every HTML, CSS, and JavaScript file in the project.
+
+---
+
+# Engineering Philosophy
+
+Write code like a senior frontend engineer building a premium commercial website.
+
+Every line of code should be:
+
+• Intentional
+
+• Readable
+
+• Maintainable
+
+• Performant
+
+• Accessible
+
+• Production-ready
+
+Always prefer quality over speed.
+
+Never sacrifice maintainability for cleverness.
+
+---
+
+# Core Principles
+
+Always write production-quality code.
+
+Prioritize:
+
+• Readability
+
+• Maintainability
+
+• Accessibility
+
+• Performance
+
+• Scalability
+
+• Security
+
+When implementing new sections:
+
+• Extend the existing architecture.
+
+• Never rewrite completed components unless explicitly instructed.
+
+• Avoid duplicate code.
+
+• Prefer reusable solutions.
+
+• Reuse existing variables, helper functions and utility classes.
 
 ---
 
@@ -21,21 +76,41 @@ This document defines the coding standards for the project. Every contribution s
 
 ## Semantic Structure
 
-Use semantic HTML whenever possible.
+Always use semantic HTML.
 
-Examples:
+Preferred elements:
 
-* header
-* nav
-* main
-* section
-* article
-* figure
-* picture
-* footer
-* form
+header
 
-Avoid unnecessary div nesting.
+nav
+
+main
+
+section
+
+article
+
+aside
+
+figure
+
+picture
+
+footer
+
+address
+
+form
+
+button
+
+Avoid unnecessary wrapper divs.
+
+Every section should have a meaningful heading.
+
+Only one H1 may exist.
+
+Maintain logical heading hierarchy.
 
 ---
 
@@ -43,48 +118,89 @@ Avoid unnecessary div nesting.
 
 Every interactive element must:
 
-* be keyboard accessible
-* have visible focus states
-* include descriptive labels
-* support screen readers where appropriate
+• Be keyboard accessible
 
-Images must include meaningful alt text.
+• Have visible focus styles
 
-Decorative images should use empty alt attributes.
+• Include accessible labels
+
+• Support screen readers
+
+Use ARIA only when semantic HTML is insufficient.
+
+Images
+
+Informative images require descriptive alt text.
+
+Decorative images must use:
+
+alt=""
 
 ---
 
-## Naming
+## Forms
 
-Use consistent class naming.
+Every form must include:
 
-Example:
+Proper labels
 
-reservation
+Correct input types
 
-reservation__container
+Autocomplete attributes
 
-reservation__header
+Required validation
 
-reservation__title
+Accessible error messages
 
-reservation__form
+Example input types:
 
-reservation__field
+text
 
-reservation__button
+email
 
-Avoid vague names such as:
+tel
+
+textarea
+
+---
+
+## Naming Convention
+
+Use BEM methodology.
+
+Example
+
+hero
+
+hero__content
+
+hero__title
+
+hero__buttons
+
+products
+
+products__grid
+
+products__card
+
+products__image
+
+products__title
+
+Avoid names such as:
+
+box
 
 container2
 
-box
+wrapper
 
 item
 
 temp
 
-wrapper1
+section1
 
 ---
 
@@ -92,47 +208,115 @@ wrapper1
 
 ## Organization
 
-Organize CSS in logical sections.
+Organize CSS in this order:
 
-Example:
+1. Variables
 
-Section
+2. Reset
 
-Layout
+3. Base
 
-Components
+4. Typography
 
-Typography
+5. Layout
 
-Buttons
+6. Components
 
-Cards
+7. Utilities
 
-Forms
+8. Animations
 
-Animations
-
-Media Queries
+9. Media Queries
 
 ---
 
-## Variables
+## CSS Variables
 
-Always reuse existing CSS variables.
+Never hardcode repeated values.
 
-Never hardcode colors already defined.
+Always use CSS Custom Properties.
 
-Never duplicate spacing values.
+Variables should include:
+
+Colors
+
+Spacing
+
+Typography
+
+Shadows
+
+Border Radius
+
+Transitions
+
+Animation Durations
+
+Container Widths
+
+Z-index Layers
+
+Every visual decision should follow DESIGN_SYSTEM.md.
+
+---
+
+## Layout
+
+Use:
+
+Flexbox
+
+CSS Grid
+
+Avoid layout hacks.
+
+Never use floats for layouts.
+
+Keep spacing consistent.
+
+Prefer intrinsic layouts.
 
 ---
 
 ## Responsive Design
 
-Desktop-first unless the existing project uses another approach.
+Desktop-first architecture.
 
-Breakpoints should remain consistent throughout the project.
+Support:
 
-Avoid unnecessary media queries.
+Desktop
+
+Laptop
+
+Tablet
+
+Mobile
+
+Large Displays
+
+Avoid excessive media queries.
+
+Build components that naturally adapt.
+
+---
+
+## Typography
+
+Never hardcode font families.
+
+Always use the typography defined in DESIGN_SYSTEM.md.
+
+Maintain consistent spacing between:
+
+Headings
+
+Paragraphs
+
+Lists
+
+Buttons
+
+Cards
 
 ---
 
@@ -140,37 +324,63 @@ Avoid unnecessary media queries.
 
 Animate only:
 
-* transform
-* opacity
+opacity
+
+transform
+
+filter (when appropriate)
 
 Never animate:
 
-* width
-* height
-* top
-* left
-* margin
-* padding
+width
 
-Use GPU-friendly animations.
+height
 
----
+left
 
-## Transitions
+top
 
-Default easing:
+margin
+
+padding
+
+Animation duration:
+
+200ms–700ms
+
+Preferred easing:
 
 cubic-bezier(0.22,1,0.36,1)
 
-Transition durations should remain consistent.
+Support:
 
-Avoid excessive motion.
+prefers-reduced-motion
+
+Animations should communicate quality—not decoration.
+
+---
+
+## Shadows
+
+Use layered shadows.
+
+Avoid harsh black shadows.
+
+Maintain consistent elevation levels.
+
+---
+
+## Border Radius
+
+Use only approved radius values from DESIGN_SYSTEM.md.
+
+Never introduce inconsistent radii.
 
 ---
 
 # JavaScript Standards
 
-Use modern ES6+ syntax.
+Use modern ES6+.
 
 Prefer:
 
@@ -178,116 +388,469 @@ const
 
 let
 
-Arrow functions
+Arrow Functions
 
-Template literals
+Template Literals
 
-Early returns
+Destructuring
+
+Optional Chaining
+
+Nullish Coalescing
+
+Early Returns
+
+Async patterns where appropriate.
 
 ---
 
 ## Structure
 
-Separate responsibilities.
+Organize JavaScript into:
 
-Example:
+DOM Selection
 
-DOM selection
+Utility Functions
 
-Event listeners
+Components
 
-Validation
-
-Animation
-
-Utility functions
+Event Listeners
 
 Initialization
+
+Each function should perform one responsibility.
+
+Avoid monolithic functions.
 
 ---
 
 ## DOM Queries
 
-Cache selectors.
+Cache selectors whenever possible.
 
 Avoid repeatedly querying the DOM.
+
+Use event delegation when beneficial.
 
 ---
 
 ## Events
 
-Avoid duplicate event listeners.
+Never create duplicate event listeners.
 
-Delegate events when appropriate.
+Use passive listeners for:
 
-Remove listeners when no longer needed.
+scroll
 
----
+touch
 
-## Functions
+wheel
 
-Functions should perform one responsibility.
+Debounce expensive operations.
 
-Prefer small reusable utilities.
-
-Avoid deeply nested logic.
+Throttle animations where necessary.
 
 ---
 
 ## Global Scope
 
-Do not pollute the global namespace.
+Never pollute the global namespace.
 
-Reuse existing modules and helpers.
+Encapsulate functionality.
 
----
-
-# Performance
-
-Lazy load where appropriate.
-
-Avoid unnecessary reflows.
-
-Minimize layout thrashing.
-
-Avoid expensive loops.
-
-Prefer CSS for simple visual effects.
+Use modules when applicable.
 
 ---
 
-# Accessibility
+# Performance Standards
 
-Support keyboard navigation.
+Target Lighthouse Scores
 
-Support reduced motion.
+Performance
 
-Use semantic markup.
+95+
 
-Maintain sufficient color contrast.
+Accessibility
 
-Use aria attributes only when necessary.
+100
+
+Best Practices
+
+100
+
+SEO
+
+100
 
 ---
 
-# Comments
+## Images
 
-Only comment when it improves maintainability.
+Preferred formats:
 
-Do not comment obvious code.
+WebP
+
+AVIF
+
+Requirements:
+
+Responsive sizing
+
+Width and height attributes
+
+Lazy loading
+
+Compressed assets
+
+Meaningful filenames
+
+Proper alt text
 
 ---
 
-# Code Quality
+## Fonts
 
-Before considering work complete, verify:
+Load only required weights.
 
-* No duplicate code
-* No unused CSS
-* No unused JavaScript
-* No console errors
-* No accessibility regressions
-* Responsive across major viewport sizes
-* Consistent naming conventions
-* Existing architecture preserved
-* Production-ready quality
+Use:
+
+font-display: swap
+
+Preconnect required font providers.
+
+Avoid unnecessary font files.
+
+---
+
+## JavaScript Performance
+
+Load scripts using:
+
+defer
+
+Avoid unnecessary third-party libraries.
+
+Minimize DOM updates.
+
+Batch layout reads and writes.
+
+Avoid layout thrashing.
+
+Use requestAnimationFrame for animation logic.
+
+---
+
+# SEO Standards
+
+Every page must include:
+
+Unique Title
+
+Meta Description
+
+Open Graph Tags
+
+Twitter Cards
+
+Canonical URL
+
+Structured Schema
+
+Proper Heading Hierarchy
+
+Meaningful Alt Text
+
+Semantic HTML
+
+Only one H1.
+
+Readable URLs.
+
+Fast loading pages.
+
+---
+
+# Security Standards
+
+Never expose:
+
+API Keys
+
+Secrets
+
+Tokens
+
+Passwords
+
+Avoid:
+
+innerHTML
+
+unless the content is fully trusted.
+
+Prefer:
+
+textContent
+
+Validate every form field.
+
+Sanitize dynamic content.
+
+Never use inline JavaScript.
+
+---
+
+# Accessibility Standards
+
+Meet WCAG AA guidelines.
+
+Support:
+
+Keyboard navigation
+
+Screen readers
+
+High color contrast
+
+Visible focus indicators
+
+Logical tab order
+
+Touch-friendly controls
+
+Meaningful button labels
+
+Interactive elements must remain usable without a mouse.
+
+---
+
+# Code Comments
+
+Comment only when necessary.
+
+Explain:
+
+WHY something exists.
+
+Avoid commenting obvious code.
+
+Comments should improve maintainability—not increase noise.
+
+---
+
+# File Organization
+
+Maintain consistent project structure.
+
+Required files:
+
+index.html
+
+style.css
+
+script.js
+
+Assets:
+
+assets/
+
+images/
+
+icons/
+
+fonts/
+
+backgrounds/
+
+products/
+
+Keep filenames lowercase.
+
+Use hyphens.
+
+Example:
+
+hero-steel.webp
+
+wire-rods.webp
+
+warehouse.webp
+
+Never create duplicate assets.
+
+---
+
+# Component Rules
+
+Every section should be modular.
+
+Avoid tightly coupled components.
+
+New implementations must never break previous sections.
+
+Always extend before replacing.
+
+Components should be reusable whenever practical.
+
+---
+
+# Browser Support
+
+Ensure compatibility with:
+
+Chrome
+
+Edge
+
+Firefox
+
+Safari
+
+Latest stable versions.
+
+Progressive enhancement should be preferred.
+
+---
+
+# Premium UI Standards
+
+Every interface should feel:
+
+Premium
+
+Industrial
+
+Modern
+
+Editorial
+
+Reliable
+
+Minimal
+
+Professional
+
+Trustworthy
+
+Avoid:
+
+Template layouts
+
+Heavy gradients
+
+Over-animation
+
+Bright colors
+
+Crowded interfaces
+
+Large decorative elements
+
+Whitespace is intentional.
+
+Restraint creates premium design.
+
+---
+
+# Motion Performance
+
+Maintain smooth interactions.
+
+Target:
+
+60 FPS
+
+Use:
+
+IntersectionObserver
+
+requestAnimationFrame
+
+CSS transforms
+
+GPU-accelerated animations
+
+Avoid expensive repaint operations.
+
+---
+
+# Code Review Checklist
+
+Before completing any task verify:
+
+✓ No console errors
+
+✓ No broken links
+
+✓ No duplicate code
+
+✓ No unused CSS
+
+✓ No unused JavaScript
+
+✓ Fully responsive
+
+✓ Keyboard accessible
+
+✓ Lighthouse ready
+
+✓ Forms validated
+
+✓ Images optimized
+
+✓ Animations smooth
+
+✓ Semantic HTML
+
+✓ SEO compliant
+
+✓ Structured Schema preserved
+
+✓ Existing architecture maintained
+
+✓ DESIGN_SYSTEM.md followed
+
+✓ PROJECT_RULES.md followed
+
+✓ Production-ready quality
+
+---
+
+# Claude Workflow
+
+For every implementation:
+
+1. Read PROJECT_RULES.md.
+2. Read DESIGN_SYSTEM.md.
+3. Read PROJECT_PROGRESS.md.
+4. Understand the requested section.
+5. Reuse existing components whenever possible.
+6. Preserve responsiveness.
+7. Preserve accessibility.
+8. Preserve animations.
+9. Preserve performance.
+10. Self-review before returning code.
+
+---
+
+# Final Engineering Standard
+
+Assume every line of code will be reviewed by a senior frontend architect.
+
+The code should feel handcrafted, elegant, scalable, and easy to maintain.
+
+If multiple implementation approaches exist, always choose the solution that is:
+
+• More readable
+
+• More performant
+
+• More reusable
+
+• More maintainable
+
+• More accessible
+
+• More future-proof
+
+The finished website should meet the standards of a premium international B2B industrial company and be suitable for production deployment without requiring structural refactoring.
